@@ -1,9 +1,11 @@
 public class BloqueIteracion extends Bloque {
     private int iterador;
+    private double extraPorcentaje;
 
-    public BloqueIteracion(double umbral, int iterador) {
+    public BloqueIteracion(double umbral, int iterador, double extraPorcentaje) {
         super(umbral);
         this.iterador = iterador;
+        this.extraPorcentaje;
     }
 
     public void setIterador(int iterador) {
@@ -14,9 +16,17 @@ public class BloqueIteracion extends Bloque {
         return this.iterador;
     }
 
+    public void setExtraPorcentaje(double extraPorcentaje) {
+        this.extraPorcentaje = extraPorcentaje;
+    }
+
+    public double getExtraPorcentaje() {
+        return this.extraPorcentaje;
+    }
+
     @Override
     public double getTiempoEjecucion() {
-        return super.getTiempoEjecucion() + this.umbral * Kiko.getInstance().getPorcentaje() / 100;
+        return super.getTiempoEjecucion() + this.getExtraProcentaje() * Kiko.getInstance().getPorcentaje() / 100;
     }
 
     @Override
@@ -32,7 +42,7 @@ public class BloqueIteracion extends Bloque {
         }
 
         if (!copiaElementos.isEmpty()) {
-            BloqueIteracion copia = this.getCopia();
+            BloqueIteracion copia = this.instanciar();
 
             for (Elemento e : copiaElementos) {
                 copia.addElemento(e);
@@ -44,16 +54,16 @@ public class BloqueIteracion extends Bloque {
         return null;
     }
 
-    public BloqueIteracion getCopia() {
-        return new BloqueIteracion(this.umbral, this.iterador);
+    public BloqueIteracion instanciar() {
+        return new BloqueIteracion(this.getUmbral(), this.getIterador(), this.getExtraPorcentaje());
     }
 
     @Override
     public ArrayList<String> getComandos() {
         ArrayList<String> salida = new ArrayList<String>();
 
-        for (Elemento e : this.elems) {
-            for (int i = 0; i < this.iterador; i++) {
+        for (int i = 0; i < this.iterador; i++) {
+            for (Elemento e : this.elems) {
                 salida.addAll(e.getComandos());
             }
         }

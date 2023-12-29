@@ -20,10 +20,12 @@ public class Bloque implements Elemento {
         this.elems.add(e);
     }
 
-    public static void setExtraFijo() {
-        if (Kiko.getInstance().getPorcentaje() < this.umbral) {
-            extraFijo = extraFijo * 2;
-        }
+    public static void setExtraFijo(double extra) {
+        extraFijo = extra;
+    }
+
+    public static double getExtraFijo() {
+        return extraFijo;
     }
 
     @Override
@@ -45,7 +47,13 @@ public class Bloque implements Elemento {
             salida += e.getTiempoEjecucion();
         }
 
-        return salida + extraFijo * this.getTiempoEjecucion();
+        double extra = extraFijo;
+
+        if (Kiko.getInstance().getPorcentaje() < this.umbral) {
+            extra = extra * 2;
+        }
+
+        return salida + extra * this.getTiempoEjecucion();
     }
 
     @Override
@@ -61,7 +69,7 @@ public class Bloque implements Elemento {
         }
 
         if (!copiaElementos.isEmpty()) {
-            Bloque copia = this.getCopia();
+            Bloque copia = this.instanciar();
 
             for (Elemento e : copiaElementos) {
                 copia.addElemento(e);
@@ -73,8 +81,8 @@ public class Bloque implements Elemento {
         return null;
     }
 
-    public Bloque getCopia() {
-        return new Bloque(this.umbral);
+    public Bloque instanciar() {
+        return new Bloque(this.getUmbral());
     }
 
     @Override

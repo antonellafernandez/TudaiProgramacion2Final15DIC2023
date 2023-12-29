@@ -29,7 +29,7 @@ public class ComandoSimple implements Elemento {
     @Override
     public Elemento getCopiaRestringida(Buscador b) {
         if (b.cumple(this)) {
-            Elemento copia = new ComandoSimple(this.comando, this.tiempoEjecucion, this.consumo);
+            Elemento copia = new ComandoSimple(this.getComando(), this.getTiempoEjecucion(), this.getConsumo());
             return copia;
         }
 
@@ -38,6 +38,10 @@ public class ComandoSimple implements Elemento {
 
     public void setComando(String comando) {
         this.comando = comando;
+    }
+
+    public String getComando() {
+        return this.comando;
     }
 
     @Override
