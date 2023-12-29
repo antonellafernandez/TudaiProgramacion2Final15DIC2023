@@ -25,36 +25,7 @@ public class BloqueIteracion extends Bloque {
     }
 
     @Override
-    public double getTiempoEjecucion() {
-        return super.getTiempoEjecucion() + this.getExtraProcentaje() * Kiko.getInstance().getPorcentaje() / 100;
-    }
-
-    @Override
-    public Elemento getCopiaRestringida(Buscador b) {
-        ArrayList<Elemento> copiaElementos = new ArrayList<Elemento>();
-
-        for (Elemento e : this.elems) {
-            Elemento eCopia = e.getCopiaRestringida(b);
-
-            if (eCopia != null) {
-                copiaElementos.add(eCopia);
-            }
-        }
-
-        if (!copiaElementos.isEmpty()) {
-            BloqueIteracion copia = this.instanciar();
-
-            for (Elemento e : copiaElementos) {
-                copia.addElemento(e);
-            }
-
-            return copia;
-        }
-
-        return null;
-    }
-
-    public BloqueIteracion instanciar() {
+    public Bloque instanciar() {
         return new BloqueIteracion(this.getUmbral(), this.getIterador(), this.getExtraPorcentaje());
     }
 

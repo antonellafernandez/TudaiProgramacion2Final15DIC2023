@@ -3,12 +3,11 @@ import java.util.ArrayList;
 
 public class Kiko {
     private static Kiko unicaInstancia;
-    private double bateriaInicial, bateriaActual;
+    private double bateria;
     private ArrayList<Elemento> elementos;
     
-    private Kiko(double bateriaInicial) {
-        this.bateriaInicial = bateriaInicial;
-        this.bateriaActual = bateriaInicial;
+    private Kiko(double bateria) {
+        this.bateria = bateria;
         this.elementos = new ArrayList<Elemento>();
     }
     
@@ -24,15 +23,11 @@ public class Kiko {
         this.elementos.add(e);
     }
 
-    public double getBateriaInicial() {
-        return bateriaInicial;
+    public void setBateria(double bateria) {
+        this.bateria = bateria;
     }
 
-    public void setBateriaInicial(double bateriaInicial) {
-        this.bateriaInicial = bateriaInicial;
-    }
-    
     public double getPorcentaje() {
-        return this.bateriaActual * 100 / this.bateriaInicial;
+        return bateria;
     }
 }
